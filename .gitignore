@@ -17,13 +17,11 @@ __pycache__/
 dist/
 build/
 
-# Database (generated — rebuild from CSV)
-data/*.duckdb
-data/schema.json
-data/history.db
-
 # Dataset (too large for git — download from Kaggle)
 data/*.csv
+
+# Generated at runtime
+data/history.db
 
 # Streamlit
 .streamlit/secrets.toml

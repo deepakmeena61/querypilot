@@ -1,0 +1,627 @@
+{
+  "tables": {
+    "albums": {
+      "description": "Unique albums extracted from the dataset; each album has a unique ID",
+      "row_count": 46589,
+      "columns": {
+        "album_id": {
+          "type": "int64",
+          "description": "Foreign key reference to the albums table",
+          "sample_values": [
+            1,
+            2,
+            3
+          ]
+        },
+        "album_name": {
+          "type": "str",
+          "description": "Name of the album containing the track",
+          "sample_values": [
+            "Comedy",
+            "Ghost (Acoustic)",
+            "To Begin Again"
+          ]
+        }
+      }
+    },
+    "artists": {
+      "description": "Unique artists extracted from the dataset; each artist has a unique ID",
+      "row_count": 29858,
+      "columns": {
+        "artist_id": {
+          "type": "int64",
+          "description": "Auto-incrementing unique identifier for each artist",
+          "sample_values": [
+            1,
+            2,
+            3
+          ]
+        },
+        "artist_name": {
+          "type": "str",
+          "description": "Name of the artist or band",
+          "sample_values": [
+            "!nvite",
+            "\"Cats\" 1983 Broadway Cast",
+            "\"Little\" Jimmie Dickens"
+          ]
+        }
+      }
+    },
+    "genres": {
+      "description": "Unique music genres in the dataset (e.g., pop, rock, hip-hop, classical)",
+      "row_count": 113,
+      "columns": {
+        "genre_id": {
+          "type": "int64",
+          "description": "Auto-incrementing unique identifier for each genre",
+          "sample_values": [
+            1,
+            2,
+            3
+          ]
+        },
+        "genre_name": {
+          "type": "str",
+          "description": "Music genre label (e.g., pop, rock, hip-hop)",
+          "sample_values": [
+            "acoustic",
+            "afrobeat",
+            "alt-rock"
+          ]
+        }
+      }
+    },
+    "key_names": {
+      "description": "Lookup table mapping integer key values (0-11) to musical key names (C through B)",
+      "row_count": 12,
+      "columns": {
+        "key": {
+          "type": "int64",
+          "description": "Musical key the track is in (0=C, 1=C#, 2=D, ..., 11=B)",
+          "sample_values": [
+            0,
+            1,
+            2
+          ]
+        },
+        "key_name": {
+          "type": "str",
+          "description": "Human-readable musical key name (C, C#, D, D#, E, F, F#, G, G#, A, A#, B)",
+          "sample_values": [
+            "C",
+            "C#",
+            "D"
+          ]
+        }
+      }
+    },
+    "tracks": {
+      "description": "Core table of 114K Spotify tracks with audio features and popularity scores",
+      "row_count": 89740,
+      "columns": {
+        "track_id": {
+          "type": "str",
+          "description": "Unique Spotify track identifier",
+          "sample_values": [
+            "5SuOikwiRyPMVoIQDJUgSV",
+            "4qPNDBW1i3p13qLCt0Ki3A",
+            "1iJBSr7s7jYXzM8EGcbK5b"
+          ]
+        },
+        "track_name": {
+          "type": "str",
+          "description": "Name of the song/track",
+          "sample_values": [
+            "Comedy",
+            "Ghost - Acoustic",
+            "To Begin Again"
+          ]
+        },
+        "popularity": {
+          "type": "int64",
+          "description": "Popularity score from 0-100 (higher = more popular on Spotify)",
+          "sample_values": [
+            73,
+            55,
+            57
+          ]
+        },
+        "duration_ms": {
+          "type": "int64",
+          "description": "Track duration in milliseconds",
+          "sample_values": [
+            230666,
+            149610,
+            210826
+          ]
+        },
+        "explicit": {
+          "type": "bool",
+          "description": "Whether the track contains explicit lyrics (True/False)",
+          "sample_values": [
+            false,
+            false,
+            false
+          ]
+        },
+        "danceability": {
+          "type": "float64",
+          "description": "How suitable a track is for dancing: 0.0=least danceable, 1.0=most danceable",
+          "sample_values": [
+            0.676,
+            0.42,
+            0.438
+          ]
+        },
+        "energy": {
+          "type": "float64",
+          "description": "Perceptual measure of intensity and activity: 0.0=calm, 1.0=energetic",
+          "sample_values": [
+            0.461,
+            0.166,
+            0.359
+          ]
+        },
+        "key": {
+          "type": "int64",
+          "description": "Musical key the track is in (0=C, 1=C#, 2=D, ..., 11=B)",
+          "sample_values": [
+            1,
+            1,
+            0
+          ]
+        },
+        "loudness": {
+          "type": "float64",
+          "description": "Overall loudness in decibels (dB), typically -60 to 0; higher=louder",
+          "sample_values": [
+            -6.746,
+            -17.235,
+            -9.734
+          ]
+        },
+        "mode": {
+          "type": "int64",
+          "description": "Musical mode: 1=Major (often brighter/happier), 0=Minor (often darker/sadder)",
+          "sample_values": [
+            0,
+            1,
+            1
+          ]
+        },
+        "speechiness": {
+          "type": "float64",
+          "description": "Presence of spoken words: 0.0=no speech, 1.0=pure spoken word",
+          "sample_values": [
+            0.143,
+            0.0763,
+            0.0557
+          ]
+        },
+        "acousticness": {
+          "type": "float64",
+          "description": "Confidence the track is acoustic: 0.0=not acoustic, 1.0=definitely acoustic",
+          "sample_values": [
+            0.0322,
+            0.924,
+            0.21
+          ]
+        },
+        "instrumentalness": {
+          "type": "float64",
+          "description": "Likelihood the track has no vocals: 0.0=vocals present, 1.0=instrumental",
+          "sample_values": [
+            1.01e-06,
+            5.56e-06,
+            0.0
+          ]
+        },
+        "liveness": {
+          "type": "float64",
+          "description": "Probability the track was recorded live: >0.8=likely live performance",
+          "sample_values": [
+            0.358,
+            0.101,
+            0.117
+          ]
+        },
+        "valence": {
+          "type": "float64",
+          "description": "Musical positiveness: 0.0=sad/negative, 1.0=happy/positive/euphoric",
+          "sample_values": [
+            0.715,
+            0.267,
+            0.12
+          ]
+        },
+        "tempo": {
+          "type": "float64",
+          "description": "Estimated tempo in beats per minute (BPM)",
+          "sample_values": [
+            87.917,
+            77.489,
+            76.332
+          ]
+        },
+        "time_signature": {
+          "type": "int64",
+          "description": "Estimated time signature beats per bar (3 to 7, e.g., 4=4/4 time)",
+          "sample_values": [
+            4,
+            4,
+            4
+          ]
+        },
+        "album_id": {
+          "type": "int64",
+          "description": "Foreign key reference to the albums table",
+          "sample_values": [
+            1,
+            2,
+            3
+          ]
+        },
+        "duration_min": {
+          "type": "float64",
+          "description": "Track duration in minutes (computed from duration_ms)",
+          "sample_values": [
+            3.84,
+            2.49,
+            3.51
+          ]
+        }
+      }
+    },
+    "track_artists": {
+      "description": "Junction table: many-to-many relationship between tracks and artists",
+      "row_count": 123424,
+      "columns": {
+        "track_id": {
+          "type": "str",
+          "description": "Unique Spotify track identifier",
+          "sample_values": [
+            "5SuOikwiRyPMVoIQDJUgSV",
+            "4qPNDBW1i3p13qLCt0Ki3A",
+            "1iJBSr7s7jYXzM8EGcbK5b"
+          ]
+        },
+        "artist_id": {
+          "type": "int64",
+          "description": "Auto-incrementing unique identifier for each artist",
+          "sample_values": [
+            9542,
+            2903,
+            11308
+          ]
+        }
+      }
+    },
+    "track_genres": {
+      "description": "Junction table: one genre per track in this dataset",
+      "row_count": 89740,
+      "columns": {
+        "track_id": {
+          "type": "str",
+          "description": "Unique Spotify track identifier",
+          "sample_values": [
+            "5SuOikwiRyPMVoIQDJUgSV",
+            "4qPNDBW1i3p13qLCt0Ki3A",
+            "1iJBSr7s7jYXzM8EGcbK5b"
+          ]
+        },
+        "genre_id": {
+          "type": "int64",
+          "description": "Auto-incrementing unique identifier for each genre",
+          "sample_values": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    }
+  },
+  "views": {
+    "v_track_details": {
+      "description": "Pre-joined analytical view: tracks + albums + genres + key_names. Use this for most queries about track attributes, audio features, and genres. Does NOT include artist info \u2014 use v_artist_tracks for artist queries.",
+      "columns": {
+        "track_id": {
+          "description": "Unique Spotify track identifier",
+          "sample_values": [
+            "5SuOikwiRyPMVoIQDJUgSV",
+            "4qPNDBW1i3p13qLCt0Ki3A",
+            "1iJBSr7s7jYXzM8EGcbK5b"
+          ]
+        },
+        "track_name": {
+          "description": "Name of the song/track",
+          "sample_values": [
+            "Comedy",
+            "Ghost - Acoustic",
+            "To Begin Again"
+          ]
+        },
+        "album_name": {
+          "description": "Name of the album containing the track",
+          "sample_values": [
+            "Comedy",
+            "Ghost (Acoustic)",
+            "To Begin Again"
+          ]
+        },
+        "popularity": {
+          "description": "Popularity score from 0-100 (higher = more popular on Spotify)",
+          "sample_values": [
+            73,
+            55,
+            57
+          ]
+        },
+        "duration_ms": {
+          "description": "Track duration in milliseconds",
+          "sample_values": [
+            230666,
+            149610,
+            210826
+          ]
+        },
+        "duration_min": {
+          "description": "Track duration in minutes (computed from duration_ms)",
+          "sample_values": [
+            3.84,
+            2.49,
+            3.51
+          ]
+        },
+        "explicit": {
+          "description": "Whether the track contains explicit lyrics (True/False)",
+          "sample_values": [
+            false,
+            false,
+            false
+          ]
+        },
+        "danceability": {
+          "description": "How suitable a track is for dancing: 0.0=least danceable, 1.0=most danceable",
+          "sample_values": [
+            0.676,
+            0.42,
+            0.438
+          ]
+        },
+        "energy": {
+          "description": "Perceptual measure of intensity and activity: 0.0=calm, 1.0=energetic",
+          "sample_values": [
+            0.461,
+            0.166,
+            0.359
+          ]
+        },
+        "key": {
+          "description": "Musical key the track is in (0=C, 1=C#, 2=D, ..., 11=B)",
+          "sample_values": [
+            1,
+            1,
+            0
+          ]
+        },
+        "key_name": {
+          "description": "Human-readable musical key name (C, C#, D, D#, E, F, F#, G, G#, A, A#, B)",
+          "sample_values": [
+            "C#",
+            "C#",
+            "C"
+          ]
+        },
+        "loudness": {
+          "description": "Overall loudness in decibels (dB), typically -60 to 0; higher=louder",
+          "sample_values": [
+            -6.746,
+            -17.235,
+            -9.734
+          ]
+        },
+        "mode": {
+          "description": "Musical mode: 1=Major (often brighter/happier), 0=Minor (often darker/sadder)",
+          "sample_values": [
+            0,
+            1,
+            1
+          ]
+        },
+        "mode_name": {
+          "description": "Human-readable mode name: Major or Minor",
+          "sample_values": [
+            "Minor",
+            "Major",
+            "Major"
+          ]
+        },
+        "speechiness": {
+          "description": "Presence of spoken words: 0.0=no speech, 1.0=pure spoken word",
+          "sample_values": [
+            0.143,
+            0.0763,
+            0.0557
+          ]
+        },
+        "acousticness": {
+          "description": "Confidence the track is acoustic: 0.0=not acoustic, 1.0=definitely acoustic",
+          "sample_values": [
+            0.0322,
+            0.924,
+            0.21
+          ]
+        },
+        "instrumentalness": {
+          "description": "Likelihood the track has no vocals: 0.0=vocals present, 1.0=instrumental",
+          "sample_values": [
+            1.01e-06,
+            5.56e-06,
+            0.0
+          ]
+        },
+        "liveness": {
+          "description": "Probability the track was recorded live: >0.8=likely live performance",
+          "sample_values": [
+            0.358,
+            0.101,
+            0.117
+          ]
+        },
+        "valence": {
+          "description": "Musical positiveness: 0.0=sad/negative, 1.0=happy/positive/euphoric",
+          "sample_values": [
+            0.715,
+            0.267,
+            0.12
+          ]
+        },
+        "tempo": {
+          "description": "Estimated tempo in beats per minute (BPM)",
+          "sample_values": [
+            87.917,
+            77.489,
+            76.332
+          ]
+        },
+        "time_signature": {
+          "description": "Estimated time signature beats per bar (3 to 7, e.g., 4=4/4 time)",
+          "sample_values": [
+            4,
+            4,
+            4
+          ]
+        },
+        "genre_name": {
+          "description": "Music genre label (e.g., pop, rock, hip-hop)",
+          "sample_values": [
+            "acoustic",
+            "acoustic",
+            "acoustic"
+          ]
+        }
+      }
+    },
+    "v_artist_tracks": {
+      "description": "Pre-joined analytical view: tracks + artists + albums + genres. Use this for queries involving artist names, artist statistics, or filtering by artist.",
+      "columns": {
+        "artist_name": {
+          "description": "Name of the artist or band",
+          "sample_values": [
+            "Gen Hoshino",
+            "Ben Woodward",
+            "ZAYN"
+          ]
+        },
+        "track_id": {
+          "description": "Unique Spotify track identifier",
+          "sample_values": [
+            "5SuOikwiRyPMVoIQDJUgSV",
+            "4qPNDBW1i3p13qLCt0Ki3A",
+            "1iJBSr7s7jYXzM8EGcbK5b"
+          ]
+        },
+        "track_name": {
+          "description": "Name of the song/track",
+          "sample_values": [
+            "Comedy",
+            "Ghost - Acoustic",
+            "To Begin Again"
+          ]
+        },
+        "album_name": {
+          "description": "Name of the album containing the track",
+          "sample_values": [
+            "Comedy",
+            "Ghost (Acoustic)",
+            "To Begin Again"
+          ]
+        },
+        "popularity": {
+          "description": "Popularity score from 0-100 (higher = more popular on Spotify)",
+          "sample_values": [
+            73,
+            55,
+            57
+          ]
+        },
+        "genre_name": {
+          "description": "Music genre label (e.g., pop, rock, hip-hop)",
+          "sample_values": [
+            "acoustic",
+            "acoustic",
+            "acoustic"
+          ]
+        },
+        "danceability": {
+          "description": "How suitable a track is for dancing: 0.0=least danceable, 1.0=most danceable",
+          "sample_values": [
+            0.676,
+            0.42,
+            0.438
+          ]
+        },
+        "energy": {
+          "description": "Perceptual measure of intensity and activity: 0.0=calm, 1.0=energetic",
+          "sample_values": [
+            0.461,
+            0.166,
+            0.359
+          ]
+        },
+        "valence": {
+          "description": "Musical positiveness: 0.0=sad/negative, 1.0=happy/positive/euphoric",
+          "sample_values": [
+            0.715,
+            0.267,
+            0.12
+          ]
+        },
+        "tempo": {
+          "description": "Estimated tempo in beats per minute (BPM)",
+          "sample_values": [
+            87.917,
+            77.489,
+            76.332
+          ]
+        },
+        "duration_min": {
+          "description": "Track duration in minutes (computed from duration_ms)",
+          "sample_values": [
+            3.84,
+            2.49,
+            3.51
+          ]
+        }
+      }
+    }
+  },
+  "relationships": [
+    {
+      "from": "tracks.album_id",
+      "to": "albums.album_id"
+    },
+    {
+      "from": "track_artists.track_id",
+      "to": "tracks.track_id"
+    },
+    {
+      "from": "track_artists.artist_id",
+      "to": "artists.artist_id"
+    },
+    {
+      "from": "track_genres.track_id",
+      "to": "tracks.track_id"
+    },
+    {
+      "from": "track_genres.genre_id",
+      "to": "genres.genre_id"
+    },
+    {
+      "from": "tracks.key",
+      "to": "key_names.key"
+    }
+  ]
+}
