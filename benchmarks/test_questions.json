@@ -1,0 +1,272 @@
+[
+  {
+    "id": 1,
+    "natural_language_question": "How many tracks are in the dataset?",
+    "expected_sql": "SELECT COUNT(*) AS total_tracks FROM tracks",
+    "expected_columns": ["total_tracks"],
+    "expected_row_count_range": [1, 1],
+    "difficulty": "easy",
+    "category": "aggregation"
+  },
+  {
+    "id": 2,
+    "natural_language_question": "How many unique genres are there?",
+    "expected_sql": "SELECT COUNT(*) AS genre_count FROM genres",
+    "expected_columns": ["genre_count"],
+    "expected_row_count_range": [1, 1],
+    "difficulty": "easy",
+    "category": "aggregation"
+  },
+  {
+    "id": 3,
+    "natural_language_question": "How many unique artists are in the dataset?",
+    "expected_sql": "SELECT COUNT(*) AS artist_count FROM artists",
+    "expected_columns": ["artist_count"],
+    "expected_row_count_range": [1, 1],
+    "difficulty": "easy",
+    "category": "aggregation"
+  },
+  {
+    "id": 4,
+    "natural_language_question": "What is the average popularity score across all tracks?",
+    "expected_sql": "SELECT ROUND(AVG(popularity), 2) AS avg_popularity FROM tracks",
+    "expected_columns": ["avg_popularity"],
+    "expected_row_count_range": [1, 1],
+    "difficulty": "easy",
+    "category": "aggregation"
+  },
+  {
+    "id": 5,
+    "natural_language_question": "What is the average tempo across all tracks?",
+    "expected_sql": "SELECT ROUND(AVG(tempo), 2) AS avg_tempo FROM tracks",
+    "expected_columns": ["avg_tempo"],
+    "expected_row_count_range": [1, 1],
+    "difficulty": "easy",
+    "category": "aggregation"
+  },
+  {
+    "id": 6,
+    "natural_language_question": "How many tracks have explicit lyrics?",
+    "expected_sql": "SELECT COUNT(*) AS explicit_track_count FROM tracks WHERE explicit = true",
+    "expected_columns": ["explicit_track_count"],
+    "expected_row_count_range": [1, 1],
+    "difficulty": "easy",
+    "category": "filtering"
+  },
+  {
+    "id": 7,
+    "natural_language_question": "What are the 10 most popular songs in the dataset?",
+    "expected_sql": "SELECT track_name, album_name, popularity FROM v_track_details ORDER BY popularity DESC LIMIT 10",
+    "expected_columns": ["track_name", "album_name", "popularity"],
+    "expected_row_count_range": [10, 10],
+    "difficulty": "easy",
+    "category": "ranking"
+  },
+  {
+    "id": 8,
+    "natural_language_question": "What is the longest track in the dataset?",
+    "expected_sql": "SELECT track_name, album_name, duration_min FROM v_track_details ORDER BY duration_min DESC LIMIT 1",
+    "expected_columns": ["track_name", "album_name", "duration_min"],
+    "expected_row_count_range": [1, 1],
+    "difficulty": "easy",
+    "category": "ranking"
+  },
+  {
+    "id": 9,
+    "natural_language_question": "What is the minimum, maximum, and average danceability score?",
+    "expected_sql": "SELECT ROUND(MIN(danceability), 3) AS min_danceability, ROUND(MAX(danceability), 3) AS max_danceability, ROUND(AVG(danceability), 3) AS avg_danceability FROM tracks",
+    "expected_columns": ["min_danceability", "max_danceability", "avg_danceability"],
+    "expected_row_count_range": [1, 1],
+    "difficulty": "easy",
+    "category": "aggregation"
+  },
+  {
+    "id": 10,
+    "natural_language_question": "Show me all acoustic tracks with popularity above 80",
+    "expected_sql": "SELECT track_name, album_name, popularity, acousticness FROM v_track_details WHERE acousticness > 0.8 AND popularity > 80 ORDER BY popularity DESC LIMIT 20",
+    "expected_columns": ["track_name", "album_name", "popularity", "acousticness"],
+    "expected_row_count_range": [1, 500],
+    "difficulty": "easy",
+    "category": "filtering"
+  },
+  {
+    "id": 11,
+    "natural_language_question": "What are the top 10 genres by number of tracks?",
+    "expected_sql": "SELECT genre_name, COUNT(*) AS track_count FROM v_track_details GROUP BY genre_name ORDER BY track_count DESC LIMIT 10",
+    "expected_columns": ["genre_name", "track_count"],
+    "expected_row_count_range": [10, 10],
+    "difficulty": "medium",
+    "category": "aggregation"
+  },
+  {
+    "id": 12,
+    "natural_language_question": "What is the average danceability score by genre, ranked highest to lowest?",
+    "expected_sql": "SELECT genre_name, ROUND(AVG(danceability), 3) AS avg_danceability FROM v_track_details GROUP BY genre_name ORDER BY avg_danceability DESC",
+    "expected_columns": ["genre_name", "avg_danceability"],
+    "expected_row_count_range": [50, 200],
+    "difficulty": "medium",
+    "category": "aggregation"
+  },
+  {
+    "id": 13,
+    "natural_language_question": "Which genres have the highest average energy?",
+    "expected_sql": "SELECT genre_name, ROUND(AVG(energy), 3) AS avg_energy FROM v_track_details GROUP BY genre_name ORDER BY avg_energy DESC LIMIT 15",
+    "expected_columns": ["genre_name", "avg_energy"],
+    "expected_row_count_range": [10, 20],
+    "difficulty": "medium",
+    "category": "aggregation"
+  },
+  {
+    "id": 14,
+    "natural_language_question": "Which artists have the most tracks in the dataset?",
+    "expected_sql": "SELECT artist_name, COUNT(*) AS track_count FROM v_artist_tracks GROUP BY artist_name ORDER BY track_count DESC LIMIT 15",
+    "expected_columns": ["artist_name", "track_count"],
+    "expected_row_count_range": [10, 20],
+    "difficulty": "medium",
+    "category": "ranking"
+  },
+  {
+    "id": 15,
+    "natural_language_question": "What is the average song duration in minutes by genre?",
+    "expected_sql": "SELECT genre_name, ROUND(AVG(duration_min), 2) AS avg_duration_min FROM v_track_details GROUP BY genre_name ORDER BY avg_duration_min DESC",
+    "expected_columns": ["genre_name", "avg_duration_min"],
+    "expected_row_count_range": [50, 200],
+    "difficulty": "medium",
+    "category": "aggregation"
+  },
+  {
+    "id": 16,
+    "natural_language_question": "Which genres have songs that are both highly danceable and highly energetic?",
+    "expected_sql": "SELECT genre_name, COUNT(*) AS track_count, ROUND(AVG(popularity), 1) AS avg_popularity FROM v_track_details WHERE danceability > 0.7 AND energy > 0.7 GROUP BY genre_name ORDER BY track_count DESC LIMIT 10",
+    "expected_columns": ["genre_name", "track_count", "avg_popularity"],
+    "expected_row_count_range": [5, 15],
+    "difficulty": "medium",
+    "category": "filtering"
+  },
+  {
+    "id": 17,
+    "natural_language_question": "Classify tracks as short (under 3 min), medium (3-5 min), or long (over 5 min) and count each group",
+    "expected_sql": "SELECT CASE WHEN duration_min < 3 THEN 'Short (<3 min)' WHEN duration_min <= 5 THEN 'Medium (3-5 min)' ELSE 'Long (>5 min)' END AS duration_category, COUNT(*) AS track_count FROM v_track_details GROUP BY duration_category ORDER BY MIN(duration_min)",
+    "expected_columns": ["duration_category", "track_count"],
+    "expected_row_count_range": [3, 3],
+    "difficulty": "medium",
+    "category": "aggregation"
+  },
+  {
+    "id": 18,
+    "natural_language_question": "Which artists have the most tracks in the pop genre?",
+    "expected_sql": "SELECT artist_name, COUNT(*) AS track_count FROM v_artist_tracks WHERE genre_name = 'pop' GROUP BY artist_name ORDER BY track_count DESC LIMIT 10",
+    "expected_columns": ["artist_name", "track_count"],
+    "expected_row_count_range": [5, 15],
+    "difficulty": "medium",
+    "category": "filtering"
+  },
+  {
+    "id": 19,
+    "natural_language_question": "What are the happiest genres based on average valence score?",
+    "expected_sql": "SELECT genre_name, ROUND(AVG(valence), 3) AS avg_valence, COUNT(*) AS track_count FROM v_track_details GROUP BY genre_name ORDER BY avg_valence DESC LIMIT 10",
+    "expected_columns": ["genre_name", "avg_valence", "track_count"],
+    "expected_row_count_range": [5, 15],
+    "difficulty": "medium",
+    "category": "aggregation"
+  },
+  {
+    "id": 20,
+    "natural_language_question": "What percentage of tracks in each genre are explicit?",
+    "expected_sql": "SELECT genre_name, COUNT(*) AS total, SUM(CASE WHEN explicit THEN 1 ELSE 0 END) AS explicit_count, ROUND(100.0 * SUM(CASE WHEN explicit THEN 1 ELSE 0 END) / COUNT(*), 1) AS explicit_pct FROM v_track_details GROUP BY genre_name ORDER BY explicit_pct DESC LIMIT 15",
+    "expected_columns": ["genre_name", "total", "explicit_count", "explicit_pct"],
+    "expected_row_count_range": [10, 20],
+    "difficulty": "medium",
+    "category": "aggregation"
+  },
+  {
+    "id": 21,
+    "natural_language_question": "Show the relationship between loudness and energy by genre",
+    "expected_sql": "SELECT genre_name, ROUND(AVG(loudness), 2) AS avg_loudness, ROUND(AVG(energy), 3) AS avg_energy, COUNT(*) AS track_count FROM v_track_details GROUP BY genre_name ORDER BY avg_energy DESC",
+    "expected_columns": ["genre_name", "avg_loudness", "avg_energy", "track_count"],
+    "expected_row_count_range": [50, 200],
+    "difficulty": "medium",
+    "category": "aggregation"
+  },
+  {
+    "id": 22,
+    "natural_language_question": "Which artists have the highest average popularity? (with at least 5 tracks)",
+    "expected_sql": "SELECT artist_name, ROUND(AVG(popularity), 1) AS avg_popularity, COUNT(*) AS track_count FROM v_artist_tracks GROUP BY artist_name HAVING COUNT(*) >= 5 ORDER BY avg_popularity DESC LIMIT 15",
+    "expected_columns": ["artist_name", "avg_popularity", "track_count"],
+    "expected_row_count_range": [10, 20],
+    "difficulty": "medium",
+    "category": "ranking"
+  },
+  {
+    "id": 23,
+    "natural_language_question": "Which artists have average popularity above the overall dataset average?",
+    "expected_sql": "SELECT artist_name, ROUND(AVG(popularity), 1) AS avg_popularity, COUNT(*) AS track_count FROM v_artist_tracks GROUP BY artist_name HAVING AVG(popularity) > (SELECT AVG(popularity) FROM tracks) AND COUNT(*) >= 3 ORDER BY avg_popularity DESC LIMIT 20",
+    "expected_columns": ["artist_name", "avg_popularity", "track_count"],
+    "expected_row_count_range": [10, 500],
+    "difficulty": "hard",
+    "category": "complex"
+  },
+  {
+    "id": 24,
+    "natural_language_question": "Within each genre, what are the top 3 most popular tracks?",
+    "expected_sql": "SELECT genre_name, track_name, popularity, rank_in_genre FROM (SELECT genre_name, track_name, popularity, ROW_NUMBER() OVER (PARTITION BY genre_name ORDER BY popularity DESC) AS rank_in_genre FROM v_track_details) ranked WHERE rank_in_genre <= 3 ORDER BY genre_name, rank_in_genre",
+    "expected_columns": ["genre_name", "track_name", "popularity", "rank_in_genre"],
+    "expected_row_count_range": [100, 1000],
+    "difficulty": "hard",
+    "category": "complex"
+  },
+  {
+    "id": 25,
+    "natural_language_question": "Which genres have above-average popularity AND above-average danceability?",
+    "expected_sql": "SELECT genre_name, ROUND(AVG(popularity), 1) AS avg_popularity, ROUND(AVG(danceability), 3) AS avg_danceability, COUNT(*) AS track_count FROM v_track_details GROUP BY genre_name HAVING AVG(popularity) > (SELECT AVG(popularity) FROM tracks) AND AVG(danceability) > (SELECT AVG(danceability) FROM tracks) ORDER BY avg_popularity DESC",
+    "expected_columns": ["genre_name", "avg_popularity", "avg_danceability", "track_count"],
+    "expected_row_count_range": [1, 50],
+    "difficulty": "hard",
+    "category": "complex"
+  },
+  {
+    "id": 26,
+    "natural_language_question": "How does average popularity change with the musical mode (major vs minor) across genres?",
+    "expected_sql": "SELECT genre_name, mode_name, ROUND(AVG(popularity), 1) AS avg_popularity, COUNT(*) AS track_count FROM v_track_details GROUP BY genre_name, mode_name ORDER BY genre_name, mode_name",
+    "expected_columns": ["genre_name", "mode_name", "avg_popularity", "track_count"],
+    "expected_row_count_range": [50, 400],
+    "difficulty": "hard",
+    "category": "complex"
+  },
+  {
+    "id": 27,
+    "natural_language_question": "What is the correlation between acousticness and energy by genre? Show genres where acoustic tracks are much less energetic.",
+    "expected_sql": "SELECT genre_name, ROUND(AVG(CASE WHEN acousticness > 0.5 THEN energy END), 3) AS avg_energy_acoustic, ROUND(AVG(CASE WHEN acousticness <= 0.5 THEN energy END), 3) AS avg_energy_non_acoustic, COUNT(*) AS track_count FROM v_track_details GROUP BY genre_name HAVING COUNT(*) > 50 ORDER BY (avg_energy_non_acoustic - avg_energy_acoustic) DESC LIMIT 10",
+    "expected_columns": ["genre_name", "avg_energy_acoustic", "avg_energy_non_acoustic", "track_count"],
+    "expected_row_count_range": [5, 15],
+    "difficulty": "hard",
+    "category": "complex"
+  },
+  {
+    "id": 28,
+    "natural_language_question": "Which musical keys are associated with the highest average valence (happiness)?",
+    "expected_sql": "SELECT kn.key_name, ROUND(AVG(t.valence), 3) AS avg_valence, COUNT(*) AS track_count FROM tracks t JOIN key_names kn ON t.key = kn.key GROUP BY kn.key_name ORDER BY avg_valence DESC",
+    "expected_columns": ["key_name", "avg_valence", "track_count"],
+    "expected_row_count_range": [12, 12],
+    "difficulty": "hard",
+    "category": "aggregation"
+  },
+  {
+    "id": 29,
+    "natural_language_question": "Find artists who appear in more than 3 different genres",
+    "expected_sql": "SELECT artist_name, COUNT(DISTINCT genre_name) AS genre_count, STRING_AGG(DISTINCT genre_name, ', ' ORDER BY genre_name) AS genres FROM v_artist_tracks GROUP BY artist_name HAVING COUNT(DISTINCT genre_name) > 3 ORDER BY genre_count DESC LIMIT 15",
+    "expected_columns": ["artist_name", "genre_count"],
+    "expected_row_count_range": [1, 200],
+    "difficulty": "hard",
+    "category": "complex"
+  },
+  {
+    "id": 30,
+    "natural_language_question": "What is the audio fingerprint of the most popular genre? Show average values for all audio features.",
+    "expected_sql": "SELECT genre_name, ROUND(AVG(danceability), 3) AS avg_danceability, ROUND(AVG(energy), 3) AS avg_energy, ROUND(AVG(valence), 3) AS avg_valence, ROUND(AVG(acousticness), 3) AS avg_acousticness, ROUND(AVG(instrumentalness), 3) AS avg_instrumentalness, ROUND(AVG(speechiness), 3) AS avg_speechiness, ROUND(AVG(tempo), 1) AS avg_tempo, ROUND(AVG(loudness), 2) AS avg_loudness, COUNT(*) AS track_count FROM v_track_details GROUP BY genre_name ORDER BY COUNT(*) DESC LIMIT 1",
+    "expected_columns": ["genre_name", "avg_danceability", "avg_energy", "avg_valence", "avg_acousticness", "avg_instrumentalness", "avg_speechiness", "avg_tempo", "avg_loudness", "track_count"],
+    "expected_row_count_range": [1, 1],
+    "difficulty": "hard",
+    "category": "complex"
+  }
+]

@@ -1,0 +1,44 @@
+# Environment
+.env
+*.env
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# Database (generated — rebuild from CSV)
+data/*.duckdb
+data/schema.json
+data/history.db
+
+# Dataset (too large for git — download from Kaggle)
+data/*.csv
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Benchmark results (generated)
+benchmarks/results_*.json
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Claude Code project memory
+.claude/
