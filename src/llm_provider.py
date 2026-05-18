@@ -338,6 +338,11 @@ def _is_daily_exhausted(e: Exception) -> bool:
     ])
 
 
+def _is_unavailable(e: Exception) -> bool:
+    s = str(e).lower()
+    return any(kw in s for kw in ["503", "unavailable", "high demand", "overloaded"])
+
+
 def call_llm(system_prompt: str, user_prompt: str, temperature: float = 0.0) -> str:
     """Call whichever LLM provider is available, auto-falling back on daily quota exhaustion."""
     global _api_call_count
@@ -358,6 +363,9 @@ def call_llm(system_prompt: str, user_prompt: str, temperature: float = 0.0) -> 
         except Exception as e:
             if _is_daily_exhausted(e):
                 logger.warning(f"{provider} daily quota exhausted — falling back to next provider")
+                _exhausted_providers.add(provider)
+            elif _is_unavailable(e):
+                logger.warning(f"{provider} unavailable (503) — falling back to next provider")
                 _exhausted_providers.add(provider)
             else:
                 raise
@@ -391,6 +399,9 @@ def call_llm_json(
         except Exception as e:
             if _is_daily_exhausted(e):
                 logger.warning(f"{provider} daily quota exhausted — falling back to next provider")
+                _exhausted_providers.add(provider)
+            elif _is_unavailable(e):
+                logger.warning(f"{provider} unavailable (503) — falling back to next provider")
                 _exhausted_providers.add(provider)
             else:
                 raise
